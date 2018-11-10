@@ -36,7 +36,7 @@ void drawBranch( branch *br, double initialPoint[2] ) {
 void drawTree() {
 
     double initialPoint[] = INIT_POINT;
-    br = new branch( 5, 300 + rZ, 20, PI/2 );
+    br = new branch( 80, 300 + rZ, 2, PI/2 );
 
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -60,7 +60,6 @@ void drawTree() {
 
 void keyboard(int key, int x, int y) {
 
-    std::cout << key << std::endl;
     if (key == GLUT_KEY_RIGHT) {
         rX += 0.1;
     }
@@ -87,7 +86,7 @@ int main(int argc, char **argv) {
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
-    glutInitWindowSize(WINSIZE, WINSIZE);
+    glutInitWindowSize(1600, 900);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Tree Fractal");
     glutDisplayFunc(drawTree);
