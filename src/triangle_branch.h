@@ -5,8 +5,8 @@
 
 class triangle_branch : public branch {
     public:
-        triangle_branch( double minLength, double length, double angle, branch* parent );
-        triangle_branch( double minLength, double length, double angle );
+        triangle_branch( double minLength, double length, double width, double angle, branch* parent );
+        triangle_branch( double minLength, double length, double width, double angle );
         void subdivide();
 };
 

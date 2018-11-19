@@ -1,4 +1,5 @@
 #include "./src/branch.h"
+#include "./src/triangle_branch.h"
 #define PI 3.1415
 #include "GL/freeglut.h"
 #include "GL/gl.h"
@@ -9,6 +10,7 @@
 #define WINSIZE 800
 
 branch *br = NULL;
+int op = 0;
 double rX = 0;
 double rY = 0;
 double rZ = 0;
@@ -36,7 +38,13 @@ void drawBranch( branch *br, double initialPoint[2] ) {
 void drawTree() {
 
     double initialPoint[] = INIT_POINT;
-    br = new branch( 80, 300 + rZ, 2, PI/2 );
+    if (op) {
+        br = NULL;
+        br = new branch( 4, 300 + rZ, 20, PI/2 );
+    } else {
+        br = NULL;
+        br = new triangle_branch( 4 , 300 + rZ, 20, PI/2);
+    }
 
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -58,26 +66,35 @@ void drawTree() {
 
 }
 
-void keyboard(int key, int x, int y) {
+void keyboard(unsigned char key, int x, int y) {
 
-    if (key == GLUT_KEY_RIGHT) {
-        rX += 0.1;
-    }
-    else if (key == GLUT_KEY_LEFT) {
-        rX -= 0.1;
-    }
-    else if (key == GLUT_KEY_DOWN) {
-        rY -= 0.1;
-    }
-    else if (key == GLUT_KEY_UP) {
+    std::cout << key << std::endl;
+    if (key == 'w') {
         rY += 0.1;
     }
-    else if (key == 112) {
+    else if (key == 's') {
+        rY -= 0.1;
+    }
+    else if (key == 'a') {
+        rX -= 0.1;
+    }
+    else if (key == 'd') {
+        rX += 0.1;
+    }
+    else if (key == '+') {
         rZ += 10;
     }
-    else if (key == 114) {
+    else if (key == '-') {
         rZ -= 10;
     }
+    else if (key == 'c') {
+        op = 1;
+    }
+    else if (key == 't') {
+        op = 0;
+    }
+
+
 
     glutPostRedisplay();
 }
@@ -90,7 +107,7 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Tree Fractal");
     glutDisplayFunc(drawTree);
-    glutSpecialFunc(keyboard);
+    glutKeyboardFunc(keyboard);
     glutMainLoop();
     return 0;
 

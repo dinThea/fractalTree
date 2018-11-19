@@ -7,7 +7,6 @@ branch::branch( double minLength, double length, double width, double angle, bra
     minLength(minLength), length(length), width(width), angle(angle), parent(parent), level(parent->level + 1)
 {   
     if ( length > minLength ) this->subdivide();
-
 }
 
 branch::branch( double minLength, double length, double width, double angle ) :
@@ -28,13 +27,11 @@ void branch::subdivide() {
 
     double pwidth = width/2;
     if (pwidth < 1.0) { pwidth = 1.0; }
-    branch* b1 = new branch( minLength, length / 1.3, pwidth, angle, this );
-    branch* b2 = new branch( minLength, length / 1.8, pwidth, angle + PI/6, this );
-    branch* b3 = new branch( minLength, length / 1.8, pwidth, angle - PI/6, this );
+    branch* b1 = new branch( minLength, length / 1.3, pwidth, angle + PI/12, this );
+    branch* b2 = new branch( minLength, length / 1.8, pwidth, angle - PI/6, this );
 
     childs.push_back(b1);
     childs.push_back(b2);
-    childs.push_back(b3);
 
 }
 
