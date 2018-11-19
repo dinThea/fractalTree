@@ -3,16 +3,16 @@
 #define PI 3.1415
 #include "branch.h"
 
-branch::branch( double minLength, double length, double width, double angle, branch* parent ) :
+branch::branch( double minLength, double length, double width, double angle, branch* parent , int sub = 1) :
     minLength(minLength), length(length), width(width), angle(angle), parent(parent), level(parent->level + 1)
 {   
-    if ( length > minLength ) this->subdivide();
+    if ( length > minLength && sub ) this->subdivide();
 }
 
-branch::branch( double minLength, double length, double width, double angle ) :
+branch::branch( double minLength, double length, double width, double angle , int sub = 1) :
     minLength(minLength), length(length), width(width), angle(angle), level(0)
 {
-    this->subdivide();
+    if (sub) this->subdivide();
 }
                 
 const double branch::get_length                 () { return this->length;   }
@@ -27,8 +27,8 @@ void branch::subdivide() {
 
     double pwidth = width/2;
     if (pwidth < 1.0) { pwidth = 1.0; }
-    branch* b1 = new branch( minLength, length / 1.3, pwidth, angle + PI/12, this );
-    branch* b2 = new branch( minLength, length / 1.8, pwidth, angle - PI/6, this );
+    branch* b1 = new branch( minLength, length / 1.3, pwidth, angle + PI/12, this, 1 );
+    branch* b2 = new branch( minLength, length / 1.8, pwidth, angle - PI/6, this, 1 );
 
     childs.push_back(b1);
     childs.push_back(b2);

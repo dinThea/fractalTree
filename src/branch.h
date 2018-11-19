@@ -4,8 +4,8 @@
 
 class branch {
     public:
-        branch( double minLength, double length, double width, double angle, branch* parent );
-        branch( double minLength, double length, double width, double angle );
+        branch( double minLength, double length, double width, double angle, branch* parent, int sub );
+        branch( double minLength, double length, double width, double angle, int sub );
         const void push_back(branch* child);
         virtual void subdivide();
         const double get_length();                 

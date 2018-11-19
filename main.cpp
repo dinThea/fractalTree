@@ -39,10 +39,8 @@ void drawTree() {
 
     double initialPoint[] = INIT_POINT;
     if (op) {
-        br = NULL;
-        br = new branch( 4, 300 + rZ, 20, PI/2 );
+        br = new branch( 4, 300 + rZ, 20, PI/2, 1 );
     } else {
-        br = NULL;
         br = new triangle_branch( 4 , 300 + rZ, 20, PI/2);
     }
 
